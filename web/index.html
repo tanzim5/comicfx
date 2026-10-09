@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ComicFX</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+
+  <header class="top">
+    <div class="brand"><span class="logo">C</span><b>Comic<i>FX</i></b></div>
+    <div class="crumb" id="crumb">No clip loaded</div>
+    <div class="grow"></div>
+    <div class="gpu" id="gpu"><span class="dot"></span><span id="gpuText">GPU idle</span></div>
+    <button id="export" class="cta" disabled>
+      <span class="cta-fill" id="exportFill"></span>
+      <span class="cta-label" id="exportLabel">Export MP4</span>
+    </button>
+  </header>
+
+  <aside id="lib">
+    <div class="sec-h"><span>Library</span>
+      <label class="chip-btn">+ Add video<input id="file" type="file" accept="video/*" hidden></label>
+    </div>
+    <div id="jobs"></div>
+    <div id="jobsEmpty" class="muted small">Videos you add show up here with live progress.</div>
+    <div class="sec-h"><span>Sample clips</span></div>
+    <div id="samples"></div>
+  </aside>
+
+  <main id="stage">
+    <div id="canvasWrap">
+      <div id="viewport" hidden>
+        <canvas id="cv"></canvas>
+        <div id="split" hidden><div class="grip"></div></div>
+        <div id="focus" hidden></div>
+        <div id="pickBanner" hidden><span id="pickText"></span><button id="pickCancel">Cancel</button></div>
+      </div>
+
+      <div id="empty">
+        <div class="drop-card">
+          <div class="drop-ic"><svg viewBox="0 0 24 24"><path d="M12 16V4m0 0L7 9m5-5 5 5M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg></div>
+          <h2>Drop a video to animate on top of it</h2>
+          <p>Your footage stays untouched. ComicFX builds a depth map and motion field on your GPU, then you layer hand-drawn style effects over it.</p>
+          <label class="cta big">Choose a video<input id="file2" type="file" accept="video/*" hidden></label>
+        </div>
+      </div>
+
+      <div id="overlay" hidden>
+        <div class="ov-card">
+          <svg class="ring" viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="52" class="ring-bg"/>
+            <circle cx="60" cy="60" r="52" class="ring-fg" id="ringFg"/>
+          </svg>
+          <div class="ring-num" id="ringNum">0%</div>
+          <h3 id="ovTitle">Preparing…</h3>
+          <p class="muted" id="ovSub"></p>
+          <ol class="steps" id="steps">
+            <li data-s="queued"><i></i>Queued</li>
+            <li data-s="depth"><i></i>Depth map</li>
+            <li data-s="motion"><i></i>Motion &amp; pack</li>
+            <li data-s="done"><i></i>Ready</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div id="dock" hidden>
+      <button id="play" class="round" title="Play / pause (Space)"></button>
+      <input id="scrub" type="range" min="0" max="1000" value="0">
+      <span id="time" class="mono small">0:00 / 0:00</span>
+      <div class="seg" id="views">
+        <button data-v="0" class="on">Composite</button>
+        <button data-v="1">Overlay</button>
+        <button data-v="2">Depth</button>
+        <button data-v="3">Flow</button>
+      </div>
+      <button id="cmp" class="chip-btn" title="Before / after (C)">Compare</button>
+    </div>
+
+    <div id="timeline" hidden>
+      <div class="tl-head"><span>Timeline</span><span class="muted small">drag bars to time effects · drag edges to resize</span></div>
+      <div id="tlRows"></div>
+    </div>
+  </main>
+
+  <aside id="inspector">
+    <div class="sec-h"><span>Effects</span>
+      <button id="addBtn" class="chip-btn on">+ Add effect</button>
+    </div>
+    <div id="addMenu" hidden></div>
+    <div id="layerList"></div>
+    <div id="layerEmpty" class="muted small">No effects yet. Add one, then click the video to place it.</div>
+    <div id="layerInspector"></div>
+  </aside>
+</div>
+<div id="toasts"></div>
+
+<script src="layers.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

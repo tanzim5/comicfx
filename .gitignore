@@ -1,0 +1,21 @@
+# environment / generated
+.venv/
+__pycache__/
+*.pyc
+work/
+
+# local footage — not ours to publish
+*.mp4
+*.mov
+*.mkv
+*.webm
+
+# unused experiments
+web/legacy/
+
+# editor / OS
+.claude/
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
